@@ -10,7 +10,7 @@ Our data preprocessing pipeline takes several steps.
 
 #### 1\. Load our data
 
-1A. We downloaded two Google datasets: "places" and "reviews". 
+1A. We downloaded two Google datasets: "places.clean.json" and "reviews.clean.json". These datasets can be found here: https://datarepo.eng.ucsd.edu/mcauley_group/data/googlelocal/
 - "places" stores Google locations
 - "review" stores the corresponding Google reviews.
 
