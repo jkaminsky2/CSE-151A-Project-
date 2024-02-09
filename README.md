@@ -29,6 +29,7 @@ When loading the two datasets:
 #### 2\. Clean existing columns
 - Converted price (originally a *string* ranging from "$" to "$$$$$") into an ordinal variable
 - Converted reviewTime (originally a *string*) into a datetime object
+- Converted `gps` into a geographical object so we can compare distance, geography, etc. between restaurants as a feature
 
 #### 3\. Create new columns
 - `language`: *String* - Language of the original review. Used a Google Translate API on reviewText
