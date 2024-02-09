@@ -8,7 +8,7 @@ You can also find the downloaded Jupyter Notebook in the Github directory.
 ### Data Preprocessing
 Our data preprocessing pipeline takes several steps.
 
-#### 1\. Loading our data
+#### 1\. Load our data
 
 1A. We downloaded two Google datasets: "places" and "reviews". 
 - "places" stores Google locations
@@ -26,11 +26,11 @@ When loading the two datasets:
 1B. Merged the two datasets together using the primary key "gPlusPlaceID" (which represents the Id associated with the business).
 - Used a left join on the reviews dataset
 
-#### 2\. Cleaning existing columns
+#### 2\. Clean existing columns
 - Converted price (originally a *string* ranging from "$" to "$$$$$") into an ordinal variable
 - Converted reviewTime (originally a *string*) into a datetime object
 
-#### 3\. Created new columns
+#### 3\. Create new columns
 - `language`: *String* - Language of the original review. Used a Google Translate API on reviewText
 - `translated`: *String* - English text of the review, translated into English if not already in English. Used a Google Translate API on reviewText
 - `top_category`: *String* - Top category associated with the business. Used TF-IDF
