@@ -40,6 +40,10 @@ When loading the two datasets:
 - `sentiment`: *object* - Sentiment analysis of the review. Includes negative, neutral, and positive sentiment as well as the compounded sentiment (overall sentiment based on negative, neutral, and positive sentiment). Used the vaderSentiment package to get the negative, neutral, and positive sentiment from `translated`; from this, we also got the composite sentiment to see whether the rating was positive, negative, or neutral overall.
 - `charged_words`: *object* - List of words that influenced the sentiment analysis of the review. Generated from vaderSentiment (see `sentiment`)
 - `price_words`: *object* - List of words relating from the review that relate to their opinion of the pricing of the business. (EX: "overpriced", "great deal", "not worth the cost"). Generated from vaderSentiment (see `sentiment`)
+- `longitude`, `latitude`: *String*, *String* - We convert the GPS coordinates provided in string format ([latitude, longitude]) into two separate columns, namely latitude and longitude.
+- `geo_Kmeans`: *Int* - To identify patterns and group restaurants with similar geographical locations, we implement KMeans clustering. Currently, the number of clusters is set to 200, which can be changed later.
+- `location_obj`: *object* - We leverage the GPS pairs to generate a detailed location object for each restaurant. This object includes essential geographical information such as the road, city, postal code, and country.
+- `class_$$`, `class_$$$`: *Int* - In addition to geographical details, we hot-encode the price bracket of each restaurant. If the restaurant has a price = $$, there is a 1 in the `class_$$` column and a 0 in the `class_$$$` column. Vice-versa if the price = $$$.
 
 #### 4\. Imputation
 - `reviewTime`, `unixReviewTime`: `None` is imputed with mean time
