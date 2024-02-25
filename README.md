@@ -1,6 +1,50 @@
 # CSE-151A-Project-
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
+# Checkpoint 4
+
+#### 3. Evaluate training versus testing error.
+
+Our training error is about 65%. Our testing error is 59.5%. While these numbers are high, we suspect that this is a result of an imbalanced dataset, and in reality our model is underfitting to the prediction problem. More information on that in section 4.
+
+#### 4. Where does your model fit in the fitting graph?
+
+We believe our model is underfitting the classification problem. The only reason we’re seeing the difference between training and testing error is because it’s consistently predicting the first class ($$) and the training data has a lot of that class. Therefore the model predicts with high accuracy (about 65%) in training. However, in testing, where the test data has a different class distribution, the accuracy is lower (see the confusion matrix).
+This suggests that the model is underfitting.
+
+Our data consists of unbalanced distribution of restaurant price categories, where the overwhelming majority have two dollar signs. This led our first model to underfit our data, where it predicts almost the same class (a price category of two dollar signs, $$) every time regardless of the data. This can be seen by looking at the confusion matrix: 
+[[100   5   0]
+ [ 64   6   0]
+ [  3   0   0]]
+Each column represents the predicted class. We can see an overwhelming majority of predictions lie in the first column (the first class, $$) with only 11 predictions for class 2 ($$$) and no predictions for class 3 ($$$$).
+Each row represents the true class value. These rows show that in reality there are 105 predictions in class $$ (see first row summed), 100 predictions for class 2 ($$$), etc.
+Basically, we can see that the model consistently predicts the first class ($$) and most test cases are $$.
+
+#### 5. Which are the next 2 models you plan to add and why?
+
+In our future work, we plan to implement an XGBoost model and an SVM to determine whether different model architectures can better understand and predict this classification problem.
+
+XGBoost implements an ensemble of models trained to overcome the weaknesses of the others overlaid on a base decision tree model. The nature of the model supports the finetuning of various hyperparameters (max depth, learning rate, lambda, alpha, etc.) to counteract overfitting. These additional parameters could be particularly helpful as we attempt to overcome issues regarding underfitting and overfitting.
+
+SVM was described in class and we think it would be interesting to apply to a multiclass classification problem.
+
+#### 6. Colab Link: 
+
+https://colab.research.google.com/drive/1rsKRfCgZOV-R0u1Pj4pfU-P5DVu6IIv6?usp=sharing
+
+#### 7. Conclusion
+
+For our first model, we decided to use a DNN with hyperparameter tuning to predict price category. We selected this model as it can take in complex data and apply functions to predict multiclass labels. To implement this model, we used a similar method to the one used in homework 2, where we test different combinations of activation functions, nodes in hidden layers, learning rate, and number of epochs to see which combination can produce the best accuracy. We hard coded the following: 4 layers to make the neural network complex but not too complex, the loss function binary_focal_crossentropy (due to the class imbalance present in our data), and the output layer activation function to be softmax–so that probabilities for each prediction summed up to 1.
+
+We chose not to use image data for our first model, despite the dataset providing this information. This is because we reasoned that images attached to Google restaurant reviews could be anything: food, the outside of the restaurant, a bug, something completely random. Therefore it might not be very indicative of the price of the restaurant. Moreover, classifying these images as “what they are” and then deciding the impact on price might take too much resources for a Google Colab notebook. Therefore we decided to not use the image data provided.
+
+As described in section 4, we believe our model is underfitting on the prediction problem. This could be a result of data imbalance (there are only 3 test cases which are $$$$, so the model might learn to never predict $$$$ to maximize accuracy). This could also be a result of a small dataset; a test size of 200 and a training size of about 1700 is not usually large enough for an ANN to properly grasp data distributions.
+
+There are multiple ways we can improve this model. For one, we could add more layers to the neural network to better understand and “break down”/understand the data inputs. Another huge way is to understand the different activations functions and which one works the best given our model along with the optimiser which would improve with hyperparameter tuning. We could also try to balance the dataset to get better overall accuracy for each class.
+
+As mentioned previously, one solution could be to add more data to the model. The limited size of our dataset (due to the computational complexity of our preprocessing steps and the RAM limitations of Colab) may have contributed to the underfitting our initial model experienced. However, since we are using Colab with limited RAM, we do not konw if this is technically feasible. The data preprocessing pipeline (including translation) is very computationally taxing. So increasing the amount of data may or may not be possible given our current resources.
+
+# Checkpoint 3
 Colab Notebook link: https://colab.research.google.com/drive/1bjhNxm6oj0MIGyFm1_xxBMnk-qcns9mw?usp=sharing#scrollTo=xy1WmqThhDQh
 
 You can also find the downloaded Jupyter Notebook in the Github directory.
