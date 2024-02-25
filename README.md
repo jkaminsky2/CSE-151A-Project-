@@ -28,7 +28,7 @@ In our future work, we plan to implement an XGBoost model and an SVM to determin
 
 XGBoost implements an ensemble of models trained to overcome the weaknesses of the others overlaid on a base decision tree model. The nature of the model supports the finetuning of various hyperparameters (max depth, learning rate, lambda, alpha, etc.) to counteract overfitting. These additional parameters could be particularly helpful as we attempt to overcome issues regarding underfitting and overfitting.
 
-SVM was described in class and we think it would be interesting to apply to a multiclass classification problem, especially with kernel customization tricks.
+SVM was described in class and we think it would be interesting to apply to a multiclass classification problem, especially using the kernel trick to add dimensionality and possibly create better decision boundaries.
 
 #### 6. Colab Link: 
 
