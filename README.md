@@ -18,7 +18,9 @@ Our data consists of unbalanced distribution of restaurant price categories, whe
 
 Each column represents the predicted class. We can see an overwhelming majority of predictions lie in the first column for class 1 (`$$`) with only 11 predictions for class 2 (`$$$`) and no predictions for class 3 (`$$$$`).
 Each row represents the true class value. These rows show that in reality there are 105 predictions in class `$$` (see first row summed), 100 predictions for class 2 (`$$$`), etc.
-Basically, we can see that the model consistently predicts the first class (`$$`) and most test cases are `$$`.
+Basically, we can see that the model consistently predicts the first class (`$$`) and most test cases are `$$`. 
+
+This suggests the model predicts the most common class most of the time, but doesn't understand how to differentiate classes. This suggests **underfitting.**
 
 #### 5. Which are the next 2 models you plan to add and why?
 
