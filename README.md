@@ -1,7 +1,7 @@
 # CSE-151A-Project-
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
-# Checkpoint 4
+# Checkpoint 3
 
 #### 3. Evaluate training versus testing error.
 
