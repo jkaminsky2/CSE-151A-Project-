@@ -9,16 +9,16 @@ Our training error is about 65%. Our testing error is 59.5%. While these numbers
 
 #### 4. Where does your model fit in the fitting graph?
 
-We believe our model is underfitting the classification problem. The only reason we’re seeing the difference between training and testing error is because it’s consistently predicting the first class ($$) and the training data has a lot of that class. Therefore the model predicts with high accuracy (about 65%) in training. However, in testing, where the test data has a different class distribution, the accuracy is lower (see the confusion matrix).
+We believe our model is underfitting the classification problem. The only reason we’re seeing the difference between training and testing error is because it’s consistently predicting the first class (`$$`) and the training data has a lot of that class. Therefore the model predicts with high accuracy (about 65%) in training. However, in testing, where the test data has a different class distribution, the accuracy is lower (see the confusion matrix).
 This suggests that the model is underfitting.
 
-Our data consists of unbalanced distribution of restaurant price categories, where the overwhelming majority have two dollar signs. This led our first model to underfit our data, where it predicts almost the same class (a price category of two dollar signs, $$) every time regardless of the data. This can be seen by looking at the confusion matrix: 
-[[100   5   0]
- [ 64   6   0]
- [  3   0   0]]
-Each column represents the predicted class. We can see an overwhelming majority of predictions lie in the first column (the first class, $$) with only 11 predictions for class 2 ($$$) and no predictions for class 3 ($$$$).
-Each row represents the true class value. These rows show that in reality there are 105 predictions in class $$ (see first row summed), 100 predictions for class 2 ($$$), etc.
-Basically, we can see that the model consistently predicts the first class ($$) and most test cases are $$.
+Our data consists of unbalanced distribution of restaurant price categories, where the overwhelming majority have two dollar signs. This led our first model to underfit our data, where it predicts almost the same class (a price category of two dollar signs, `$$`) every time regardless of the data. This can be seen by looking at the confusion matrix: 
+
+<img width="149" alt="Screenshot 2024-02-25 at 1 27 28 PM" src="https://github.com/jkaminsky2/CSE-151A-Project-/assets/8013994/b3231a51-185b-4198-b376-d2bd8507c9c5">
+
+Each column represents the predicted class. We can see an overwhelming majority of predictions lie in the first column for class 1 (`$$`) with only 11 predictions for class 2 (`$$$`) and no predictions for class 3 (`$$$$`).
+Each row represents the true class value. These rows show that in reality there are 105 predictions in class `$$` (see first row summed), 100 predictions for class 2 (`$$$`), etc.
+Basically, we can see that the model consistently predicts the first class (`$$`) and most test cases are `$$`.
 
 #### 5. Which are the next 2 models you plan to add and why?
 
