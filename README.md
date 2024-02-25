@@ -46,7 +46,7 @@ There are multiple ways we can improve this model. For one, we could add more la
 
 As mentioned previously, one solution could be to add more data to the model. The limited size of our dataset (due to the computational complexity of our preprocessing steps and the RAM limitations of Colab) may have contributed to the underfitting our initial model experienced. However, since we are using Colab with limited RAM, we do not konw if this is technically feasible. The data preprocessing pipeline (including translation) is very computationally taxing. So increasing the amount of data may or may not be possible given our current resources.
 
-# Checkpoint 3
+# Checkpoint 2
 Colab Notebook link: https://colab.research.google.com/drive/1bjhNxm6oj0MIGyFm1_xxBMnk-qcns9mw?usp=sharing#scrollTo=xy1WmqThhDQh
 
 You can also find the downloaded Jupyter Notebook in the Github directory.
