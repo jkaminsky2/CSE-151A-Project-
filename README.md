@@ -1,7 +1,48 @@
 # CSE-151A-Project-
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
-# Checkpoint 3
+# Milestone 4
+
+#### 3. Evaluate training versus testing error.
+Our SVM Classifier model from Milestone 4 has a training error of 0.63 and a test error of 0.60.
+
+For context, our Milestone 3 Model 1 had a training error of about 65%, with testing error around 59.5%.
+
+Overall, the training error decreased while the test error increased trivially.
+
+#### 4. Where does your model fit in the fitting graph?
+
+This SVM model is less overfitting. In the fitting graph, it would be more left (closer to ideally fitted) compared to the first model.
+In contrast, the Model 1 usually only predicts $$ with only a few rare outlier predictions of $$$. It therefore had a high training and test error.
+This second model (SVM) predicts more evenly (possibly thanks to the class weights)
+
+#### 5. Did you perform hyper parameter tuning? K-fold Cross validation? Feature expansion? What were the results?
+
+We performed:
+Hyperparameter grid search: This took about 5+ minutes to run and iterated through C, gamma, and kernel options. This increased training error and overall accuracy but decreased test error. Eventually, we deemed this change to not be helpful in increasing model performance (not implemented in final model)
+Class rebalancing: We used `imblearn.over_sampling` to rebalance the dataset. While this increased accuracy by about 5% (compared to the unbalanced dataset), we determined that changing class weights instead of resampling actually increased performance more. Therefore we switched to class weights (not implemented in final model)
+Class weights: Fed in class weights to the SVM model to help it increase accuracy. It increased performance (overall accuracy) by about 10%.
+
+#### 5. What is the plan for the next model you are thinking of and why?
+
+The next model we are going to try is XGBoost (a boosted decision tree model). It is known for being a powerful model and performing well when synthesizing complex tabular data. Hopefully it will capture the complex nature of our data and class imbalances. Another positive is that there is less preprocessing needed for the decision tree to understand/leverage features.
+
+#### 6. Colab Link: 
+
+https://colab.research.google.com/drive/1fVuWdEJfC3t6FoNlaJaenktjRcf1XFpx?usp=sharing
+
+#### 7. Conclusion
+
+The conclusion of our 2nd model is that it performed well/better than the first model. We can see from decreasing train/test error as well as looking at the raw predictions that it is predicting a more diverse range of outputs. (I.e., it’s not just predicting the same value for any input).
+To possibly improve model performance we could:
+Continue to work with the class rebalancing/class weights to see if changing/iterating those would improve performance
+Feature expansion on the existing features (more context/data for the model to work with)
+Vectorize the text inputs that our proc.csv provided ⇔ gives the model more data about reviews, restaurant names, etc. Possibly perform more complex word vectorization like sentiment analysis, positive/negative sentiment as well.
+Increase dataset size (go back into the data processing stage, use more samples) ⇔ leverage unreasonable effectiveness of data to improve model performance
+
+# Milestone 3
+
+3/10/24 Note: Joey Kaminsky improved Model 1 (from Checkpoint 3) by 5% (up to 65% testing accuracy) by using class weights, early stopping, and utilizing softmax in both the hidden and output layers. This is due to the imbalance present in our data, where getting the class weights can help the model understand the imbalance data better. Additionally, the addition of early stopping and softmax allow the model to achieve high accuracies by avoiding overfitting issues and explore different activation functions that best fit the problem at hand, respectively. While this is a slight improvement to our model, we are still dealing with the issue of the model underfitting due to trying to predict the first class too often–due to its higher frequency in the data. We try to fix this issue in the SVM model (model 2). The updates are at the beginning of Checkpoint 4 code.
 
 #### 3. Evaluate training versus testing error.
 
@@ -46,7 +87,7 @@ There are multiple ways we can improve this model. For one, we could add more la
 
 As mentioned previously, one solution could be to add more data to the model. The limited size of our dataset (due to the computational complexity of our preprocessing steps and the RAM limitations of Colab) may have contributed to the underfitting our initial model experienced. However, since we are using Colab with limited RAM, we do not konw if this is technically feasible. The data preprocessing pipeline (including translation) is very computationally taxing. So increasing the amount of data may or may not be possible given our current resources.
 
-# Checkpoint 2
+# Milestone 2
 Colab Notebook link: https://colab.research.google.com/drive/1bjhNxm6oj0MIGyFm1_xxBMnk-qcns9mw?usp=sharing#scrollTo=xy1WmqThhDQh
 
 You can also find the downloaded Jupyter Notebook in the Github directory.
