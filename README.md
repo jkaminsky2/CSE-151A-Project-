@@ -1,7 +1,7 @@
 # CSE-151A-Project-
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
-3/10/24 Note: Joey Kaminsky improved Model 1 (from Checkpoint 3) by 5% (up to 65% testing accuracy) by using class weights, early stopping, and utilizing softmax in both the hidden and output layers. This is due to the imbalance present in our data, where getting the class weights can help the model understand the imbalance data better. Additionally, the addition of early stopping and softmax allow the model to achieve high accuracies by avoiding overfitting issues and explore different activation functions that best fit the problem at hand, respectively. While this is a slight improvement to our model, we are still dealing with the issue of the model underfitting due to trying to predict the first class too often–due to its higher frequency in the data. We try to fix this issue in the SVM model (model 2). The updates can be found in the notebook `Milestone_3_JK_Updates.ipynb` or at this link: https://colab.research.google.com/drive/10ver3YLrlP45MuUj6kbIVuZaNE3fF7jx#scrollTo=L7tX2TnysAvE.
+3/10/24 Note: Joey Kaminsky improved Model 1 (from Checkpoint 3) by 5% (up to 65% testing accuracy) by using class weights, early stopping, and utilizing softmax activation function in both the hidden and output layers. This is due to the imbalance present in our data, where getting the class weights can help the model understand the imbalance data better. Additionally, the addition of early stopping and softmax activation function allow the model to achieve high accuracies by avoiding overfitting issues and explore different activation functions that best fit the problem at hand, respectively. While this is a slight improvement to our model, we are still dealing with the issue of the model underfitting due to trying to predict the first class too often–due to its higher frequency in the data. We try to fix this issue in the SVM model (model 2). The updates can be found in the notebook `Milestone_3_JK_Updates.ipynb` or at this link: https://colab.research.google.com/drive/10ver3YLrlP45MuUj6kbIVuZaNE3fF7jx#scrollTo=L7tX2TnysAvE.
 
 # Milestone 4
 
@@ -20,8 +20,10 @@ This second model (SVM) predicts more evenly (possibly thanks to the class weigh
 
 #### 5. Did you perform hyper parameter tuning? K-fold Cross validation? Feature expansion? What were the results?
 
-We performed:
+We performed the following:
+
 Hyperparameter grid search: This took about 5+ minutes to run and iterated through C, gamma, and kernel options. This increased training error and overall accuracy but decreased test error. Eventually, we deemed this change to not be helpful in increasing model performance (not implemented in final model)
+
 Class rebalancing: We used `imblearn.over_sampling` to rebalance the dataset. While this increased accuracy by about 5% (compared to the unbalanced dataset), we determined that changing class weights instead of resampling actually increased performance more. Therefore we switched to class weights (not implemented in final model)
 Class weights: Fed in class weights to the SVM model to help it increase accuracy. It increased performance (overall accuracy) by about 10%.
 
@@ -36,11 +38,13 @@ https://colab.research.google.com/drive/1fVuWdEJfC3t6FoNlaJaenktjRcf1XFpx?usp=sh
 #### 7. Conclusion
 
 The conclusion of our 2nd model is that it performed well/better than the first model. We can see from decreasing train/test error as well as looking at the raw predictions that it is predicting a more diverse range of outputs. (I.e., it’s not just predicting the same value for any input).
+
 To possibly improve model performance we could:
-Continue to work with the class rebalancing/class weights to see if changing/iterating those would improve performance
-Feature expansion on the existing features (more context/data for the model to work with)
-Vectorize the text inputs that our proc.csv provided ⇔ gives the model more data about reviews, restaurant names, etc. Possibly perform more complex word vectorization like sentiment analysis, positive/negative sentiment as well.
-Increase dataset size (go back into the data processing stage, use more samples) ⇔ leverage unreasonable effectiveness of data to improve model performance
+
+- Continue to work with the class rebalancing/class weights to see if changing/iterating those would improve performance
+- Feature expansion on the existing features (more context/data for the model to work with)
+- Vectorize the text inputs that our proc.csv provided ⇔ gives the model more data about reviews, restaurant names, etc. Possibly perform more complex word vectorization like sentiment analysis, positive/negative sentiment as well.
+- Increase dataset size (go back into the data processing stage, use more samples) ⇔ leverage unreasonable effectiveness of data to improve model performance
 
 # Milestone 3
 
