@@ -14,7 +14,7 @@ Overall, the training error decreased while the test error increased trivially.
 
 #### 4. Where does your model fit in the fitting graph?
 
-This SVM model is less overfitting. In the fitting graph, it would be more left (closer to ideally fitted) compared to the first model.
+This SVM model is less underfitting. In the fitting graph, it would be more right (closer to ideally fitted) compared to the first model.
 In contrast, the Model 1 usually only predicts $$ with only a few rare outlier predictions of $$$. It therefore had a high training and test error.
 This second model (SVM) predicts more evenly (possibly thanks to the class weights)
 
