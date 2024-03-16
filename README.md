@@ -1,9 +1,7 @@
-# CSE-151A-Project-
+# CSE 151A Project: Predicting Restaurant Price Categories Based on Review Data
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
 # Final Submission
-
-# CSE 151A Project: Predicting Restaurant Price Categories Based on Review Data
 
 ## Abstract:
 As food prices continue to surge, amateur and seasoned foodies are left to question: what qualities or features lead a restaurant to establish their prices? Over the next 6 weeks we plan to answer this question. By leveraging the CSE Google Review dataset, we will (A) create a machine learning model that accurately predicts the price bracket of a restaurant, and (B) determine the statistical significance of each input feature. Specifically, we will train a regression model on sklearn, on engineered features such as geolocation and sentiment derived from text reviews. Since many features of a restaurant such as their food suppliers are not public knowledge, the logic behind restaurant prices is often unseen by its customers. We hope that with the use of feature engineering and machine learning, we can encourage more clarity on what differentiates inexpensive from expensive restaurants.
