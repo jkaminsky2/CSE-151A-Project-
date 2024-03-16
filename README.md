@@ -311,7 +311,7 @@ We would also like to use geo-location features more accurately to create a more
 We believe that this project provides valuable insight into how different models and data processing techniques impact a highly-dimensional prediction problem. Our analysis of DNNs, SVMs, and XGBoost along with kernels, grid search, feature engineering, and class imbalance is a useful jumping-off point for future research into how to effectively and efficiently tackle complex prediction problems.
 
 ## Collaboration: 
-Joey - Joey helped with coordinating group meetings, topic selection, sentiment analysis and minor preprocessing, DNN model creation and updating, integrating model weights into the models, and different write-up contributions.
+Joey - Joey helped with coordinating group meetings, topic selection, sentiment analysis, key-word location, minor preprocessing, DNN model creation and updates, integrating model weights into the models, combining all milestones into one notebook, and different write-up contributions (namely regarding model 1 and contributions to all previous milestone write-ups).
 
 Emily - Emily helped manage everyone during each meeting. Contributed to Milestone 1 by performing translation and restaurant-relevance-filtering. Contributed to Milestone 1 write-up. Rewrote Milestone 1 work to create a more efficient proc.csv datafile (which is used in every subsequent model). Created first model (except grid search from Joey). Created second model, SVM (additions from Joey and Armaan for clas weights, grid search.) Wrote up the second model assignment. Wrote data exploration and preprocessing methods + methods, results, and discussion for Model 2. Converted all write-ups to Github README format.
 
