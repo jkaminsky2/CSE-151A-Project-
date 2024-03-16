@@ -1,7 +1,9 @@
-# CSE 151A Project: Predicting Restaurant Price Categories Based on Review Data
+# CSE-151A-Project-
 Team members: Emily, Joey, Risab, Christine (Qingtong), Viraj, Sebastian, Justin, Armaan
 
 # Final Submission
+
+# CSE 151A Project: Predicting Restaurant Price Categories Based on Review Data
 
 ## Abstract:
 As food prices continue to surge, amateur and seasoned foodies are left to question: what qualities or features lead a restaurant to establish their prices? Over the next 6 weeks we plan to answer this question. By leveraging the CSE Google Review dataset, we will (A) create a machine learning model that accurately predicts the price bracket of a restaurant, and (B) determine the statistical significance of each input feature. Specifically, we will train a regression model on sklearn, on engineered features such as geolocation and sentiment derived from text reviews. Since many features of a restaurant such as their food suppliers are not public knowledge, the logic behind restaurant prices is often unseen by its customers. We hope that with the use of feature engineering and machine learning, we can encourage more clarity on what differentiates inexpensive from expensive restaurants.
@@ -11,36 +13,32 @@ In this project, we dive deep into the pricing strategies of restaurants and cof
 
 Figures: 
 1) 
-![alt text](./final_imgs/fig1.png)
 
+![rating count](./final_imgs/fig1.png)
 
 First, we plotted the count of each rating amongst all the restaurant reviews. Here, we see that the ratings are highly skewed to the right indicating that most people give higher ratings (4 or 5) for the restaurants in the dataset.
 
-
-
-
-
-
-
-
-
 2) 
+
+![distribution of USD, pounds, euros](./final_imgs/fig2.png)
 
 Then we displayed the number of each price label and we see that there are three different currencies: United States Dollar ($), Pound Sterling (£), and Euro (€). We see that most of the price labels fall under the $$ label with the second most falling under the $$$. This could be indicative of businesses trying to stay within a band of affordability.
 
 3) 
 
-
+![relationship between price labels and rating](./final_imgs/fig3.png)
 
 Next, we tried to plot the relationship between price labels and ratings to determine whether there is any correlation between the two. What we find is that higher price labels may actually have lower ratings than lower price labels. Despite this, most price labels still tend to fall within an average rating of a four or a five.
 
 4) 
 
+![length of reviews](./final_imgs/fig4.png)
 
 Then we examined the length of reviews and find that most of the reviews are shorter in length.
 
 5)
 
+![relationship between review length and price label](./final_imgs/fig5.png)
 
 Lastly, we plotted the relationship between review length and price label and we find that most price labels have similar mean review lengths but the $$ and $$$ have far more outliers than $ which is interesting and might be an area to explore.
 
@@ -85,6 +83,7 @@ The main encoding that was performed on the dataset was price encoding. For the 
 
 To perform price encoding, first we converted all non-USD price labels into USD. We know the average price threshold for each price label: $ indicates 10 and under; $$ indicates moderately expensive, usually between $10-$25; $$$ indicates $25-$45. Using this price scheme, we applied the equation `10 * len(symbol) * conversion[symbol[0]]` to convert the price. 
 For example, we know that one euro €=$1.08. Therefore based on our equation, a price label of €€ would be equal to 10 * len(€€) * conversion[€] = 10*2*1.08 = $21.60. Since $21.60 is in between $10-$25, the price label would be converted to $$.
+
 Once all the prices were converted to USD symbols, we performed one-hot encoding to convert these symbols into one-hot encoded columns.
 
 #### Preprocessing - Handling Nulls: We handled nulls in several ways. 
@@ -94,7 +93,7 @@ Secondly, if there were null values in text features, we chose to impute them. F
 For null values in time features (ie ReviewTime), we imputed with the mean time. This is built on the assumption that the data collectors (McAuley et al) retrieved the Google reviews dataset within certain time bounds. As such, there was a limited range of times that the reviews had, so it was appropriate (or, at the very least, not very harmful) to represent any missing values with a mean.
 
 ### Model 1
-The results for Model 1 can be found in Milestone_3_JK_Updated, linked here.
+The results for Model 1 can be found in Milestone_3_JK_Updated.
 
 For the first model, we decided to use a dense neural network (DNN) to predict the price category–using a similar model to that in Homework 2. We utilized a DNN with 4 hidden layers and got optimal hyperparameters via hyperparameter tuning; we did this in the hopes of finding the optimal combination of parameters to maximize accuracy. We searched for the optimal combination of hidden layer activation functions and number of nodes, number of epochs and learning rate. We decided to measure loss with categorical_focal_crossentropy. We further customized the model by adding class_weights to the model and tuner. Finally, the output layer uses softmax as its activation function.
 As for preprocessing, we only grabbed numerical columns of the final dataframe. This included clustering, sentiment, and other numerical data. We then one-hot-encoded the price categories and accounted for NaN values in the cluster columns.
@@ -124,7 +123,10 @@ best_model = tuner.hypermodel.build(best_hyperparameters)
 best_model.fit(X_train, y_train, epochs=best_hyperparameters['epochs'])
 ```
 We then used sklearn’s `classification_report` to calculate the precision, recall, and accuracy of the test set. We also calculated training and test error manually by testing equality for each prediction and label.
+
 Model 1 Results: With model 1 and its optimized hyperparameters, we were able to achieve a 65% test accuracy, which is slightly higher than just guessing the class with the most observations every time (see below). This is greater than the training accuracy achieved in hyperparameter tuning, where the max training accuracy was 63.8%. We can see, however, that the model predicts the first result (two dollar signs) for the most part with some guesses of three dollar signs, which conveys underfitting.
+
+![accuracy, confusion matrix for model 1](./final_imgs/m1_discussion.png)
 
 ### Model 2
 The results of Model 2 can be found in the Milestone_4 notebook in Github.
@@ -159,6 +161,8 @@ Class weights were generated by Joey Kaminsky to represent the imbalance dataset
 Decision_function_shape is `ovo`, which is short for `one versus others`. In other words, we set up the model to learn to classify prices knowing that there can only be one correct label, and all other labels will be incorrect for a given instance.
 
 We then used sklearn’s `classification_report` to calculate the precision, recall, and accuracy of the test set. We also calculated training and test error manually by testing equality for each prediction and label.
+
+![classification report for model 2](./final_imgs/m2_results.png)
 
 ### Model 2 Results:
 We achieved a training accuracy of 63% and a test accuracy of 60%.  This translates to a relatively high performance for the model.
@@ -238,10 +242,14 @@ With data exploration and preprocessing, we noticed the class imbalance present 
 ### Model 1
 With this model, we utilized 4 hidden layers as we felt that this would balance out overfitting and underfitting. Additionally, we chose to go in the direction of hyperparameter tuning to optimize the activation function and number of nodes, learning rate, and number of epochs in order to achieve maximum accuracy. While we attempted to use early stopping, this made our model susceptible to predicting the most common class every time, which forced us to ditch the idea. Instead, we used class weights via ’compute_class_weight’ to let the model account for the class imbalance. Furthermore, categorical_focal_crossentropy was used to measure loss as it is best at accounting for multiclass classification for imbalance classes. We then ran the hyperparameter tuning on accuracy in order to maximize model accuracy. While we did all these things, the model still fell victim to predicting the first class for the majority of the predictions–with few guesses of other classes, as seen below. Our results are not all that believable as not every restaurant falls into the category of two dollar signs. This can be attributed to the class imbalance, where our models were unsuccessful in preventing the model from that most common class too frequently; the shortcomings that could have led to this could have been not enough variety in hyperparameters tested (for example, hidden layer number of nodes could only vary between 8 and 18) and lack of oversampling. 
 
+![Confusion matrix for model 1](./final_imgs/m1_discussion.png)
+
 ### Model 2
 For this model, our intention was to leverage the kernel trick to reduce complexity of the problem and better predict the cost of locations. We also wanted to tackle the imbalance dataset, which was, when left unaddressed, causing the model to only predict the most frequent class label.
+
 To do this, we experimented. 
-First attempt: Oversampling (Removed)
+
+#### First attempt: Oversampling (Removed)
 First, we tried oversampling to “fix” the dataset and ensure the model was training on all classes.
 ```
 from imblearn.over_sampling import RandomOverSampler
@@ -249,9 +257,11 @@ ros = RandomOverSampler(random_state=42)
 X_res, y_res = ros.fit_resample(X, y)
 ```
 This resulted in the model learning from a balanced dataset and predicting equal proportions of labels. However, since the test set is not balanced, this led to low accuracy:
+![Predictions of test set for model 2](./final_imgs/m2_discussion_1.png)
 
 Therefore while this might have taught the model about how to discern different cases, it is not helpful in the “real-world application” of the test set. Therefore, we chose to depreciate or exclude this method from the real-world application.
-Second attempt (Success!): Using class weights (Final Version of Model)
+
+#### Second attempt (Success!): Using class weights (Final Version of Model)
 We still wanted to compensate or “fix” the problem of the imbalanced dataset. However, we could tell from the first attempt that oversampling made accuracy decrease, even though it taught the model more about different classes.
 The next attempt to tackle the imbalanced dataset problem was to use class weights. Class weights allow us to manipulate the C (regularization parameter) for each class. Basically, the C value informs the SVM how large of a margin (strict or soft) should be allowed when separating classes. The larger the C-value, the smaller/stricter the margin.
 Knowing this, we used sklearn’s `compute_class_weight` method and fed in the class weights into the SVC initialization. We ended up with weights of
@@ -260,28 +270,38 @@ Knowing this, we used sklearn’s `compute_class_weight` method and fed in the c
 ```
 We ran the model and got the results as described in the Results section: a training accuracy of 0.63, with a test accuracy of 0.60. Since this is the highest test accuracy we have encountered, we chose to keep this processing technique for our final model.
 
-###Third attempt: Applying grid search (Removed)
+#### Third attempt: Applying grid search (Removed)
 We then tried to perform hyperparameter tuning on the SVM, hoping that it would result in higher performance. This would allow us to use tuned parameters like `C` and `gamma` in the SVM.
 
 The grid search took about 15 seconds to run. Printing out the results returned this:
+
+![grid search results: best parameters](./final_imgs/m2_discussion_2.png)
+
 We updated the model using `C=1000` and `gamma=0.001`.
 ```
 svm = SVC(C=1000, gamma=0.001, kernel = 'rbf', class_weight={1.0: 1, 2.0: 1.1160116448326054, 3.0: 1.9847222222222223, 4.0: 11.484848484848484}, decision_function_shape='ovo')
 ```
 This resulted in a training accuracy of 0.57. To get more information on our results, we also manually calculated the label accuracy.
+
+![training and testing accuracy printouts](./final_imgs/m2_discussion_3.png)
+
 We can see that the training accuracy was 0.67, while the test accuracy was 0.53. In other words, there was a high training accuracy, but a low test accuracy. This was a red flag for us: we suspected grid search led to overfitting the SVM. We chose to remove the grid search from the final model iteration. (You can stil see the grid search code commented in the Milestone 4 jupyter notebook).
 
-Evaluating our Final Model 2:
+#### Evaluating our Final Model 2:
 When looking at our results table, we can see that the model still predicts predominantly $$ and $$$ labels.
+
+![confusion matrix for model 2](./final_imgs/m2_discussion_4.png)
 
 The model never predicts $$$$ (4 dollar signs), but there are only 3 instances of $$$$ in the test set. This suggests that the model is still “coasting”/performing well based on the imbalance dataset and less because it understands the nuances separating the classes.
 
 ### Model 3
 We chose to use XGBoost due to its similarities to random forest training, however it additionally also has a “gradient boosting” property that enables it to perform more effectively. Due to it being an ensemble learning algorithm, it is able to compensate for weaker performance in one model through the use of several models and minimizing errors. We hoped that it would be able to perform better in comparison to our previous two models.
+
 Initially, we ran the model on our processed data. We found that our model heavily favored the 2 largest price classes, ignoring the lowest price class. When analyzing the value counts, we found that this was most likely due to the significant disparity in data and the general lack of data for the smallest price class. As a result, we used a random oversampling strategy to test if our model would perform better if we oversampled our data. However, when training our model on oversampled data, though we saw the precision and recall of these classes rise, we actually saw the accuracy go down. This was most likely due to the fact that even in the training data the smallest price class is so uncommon and it makes sense for our model to askew heavily toward the more common price classes.
+
 In hopes of increasing the accuracy of our model, we attempted to use XGBoost gridsearch to try different parameters to potentially improve our model. However, we found that the accuracy did not seem to improve significantly, even going down in some cases. Nevertheless, we believe the shortcomings of our model stem more from a lack of a diverse dataset as opposed to the model itself. Additionally, the parameters we chose to reduce complexity and overfitting may have additionally ended up harming our model more as that lack of complexity may have made it harder for our model to generalize to unseen data. 
 
-## Discussion of Model Results and Shortcomings and Conclusion
+## Conclusion
 All three of our models were not able to fully escape the issues presented by class imbalance in price category. While some were more successful than others in predicting other classes, for the most part, the two dollar sign category was typically the most predicted class; this led our models to be capped at an accuracy of roughly 65%. Due to the fact that our models were unable to differentiate the different price categories beyond a 65% accuracy (where the majority of the correct predictions were for the two dollar sign price category), we cannot accurately determine how each input feature factors into a restaurant’s price range. 
 
 If given more time and more computational resources, we would include more reviews into our dataset to get a hopefully more diversified collection of restaurant price ranges. Furthermore, we would be able to create new features that grouped together different clusters of data, which could potentially provide better insights for our models in predicting price categories. We were limited in creating new features due to the limited amount of data we had. For example, we attempted to categorize based on restaurant category, which led to ~90 categories for a limited dataset. Because only a limited number of data points fell into each category, this labeling was not useful for our classification problem. More data could have made these labels a more interesting feature for our models. Finally, if we had the option to create a fourth model, we could have explored decision tree learning. This model is more susceptible to overfitting than underfitting; we could have leveraged this model to identify how we could escape the issue of underfitting in the other models.
@@ -306,6 +326,8 @@ Justin - Justin helped with data evaluation, breaking down names of restaurant n
 Viraj - Viraj helped with introduction and a part of the conclusion and helped in choosing the dataset along with research question, Also created one of the sub-models for XGBoost Classifier using SMOTE.
 
 Christine (Qingtong) - Contributed to Model 1 preprocessing data/write up: she tackled gps converting coordinates and one-hot encoding the price bracket.
+
+---
 
 3/10/24 Note: Joey Kaminsky improved Model 1 (from Checkpoint 3) by 5% (up to 65% testing accuracy) by using class weights, early stopping, and utilizing softmax activation function in both the hidden and output layers. This is due to the imbalance present in our data, where getting the class weights can help the model understand the imbalance data better. Additionally, the addition of early stopping and softmax activation function allow the model to achieve high accuracies by avoiding overfitting issues and explore different activation functions that best fit the problem at hand, respectively. While this is a slight improvement to our model, we are still dealing with the issue of the model underfitting due to trying to predict the first class too often–due to its higher frequency in the data. We try to fix this issue in the SVM model (model 2). The updates can be found in the notebook `Milestone_3_JK_Updates.ipynb` or at this link: https://colab.research.google.com/drive/10ver3YLrlP45MuUj6kbIVuZaNE3fF7jx#scrollTo=L7tX2TnysAvE.
 
