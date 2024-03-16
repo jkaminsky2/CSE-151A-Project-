@@ -120,7 +120,7 @@ best_hyperparameters = tuner.get_best_hyperparameters()[0]
 best_model = tuner.hypermodel.build(best_hyperparameters) 
 best_model.fit(X_train, y_train, epochs=best_hyperparameters['epochs'])
 ```
-We then used sklearn’s `classification_report` to calculate the precision, recall, and accuracy of the test set. We also calculated training and test error manually by testing equality for each prediction and label.
+
 
 ### Model 2
 The results of Model 2 can be found in the Milestone_4 notebook in Github.
@@ -216,9 +216,11 @@ We also employed a grid search with the same parameters discussed above in conju
 
 ### Model 1 Results:
 
-With model 1 and its optimized hyperparameters, we were able to achieve a 65% test accuracy, which is slightly higher than just guessing the class with the most observations every time (see below). This is greater than the training accuracy achieved in hyperparameter tuning, where the max training accuracy was 63.8%. We can see, however, that the model predicts the first result (two dollar signs) for the most part with some guesses of three dollar signs, which conveys underfitting.
+We  used sklearn’s `classification_report` to calculate the precision, recall, and accuracy of the test set. We also calculated training and test error manually by testing equality for each prediction and label.
 
 ![accuracy, confusion matrix for model 1](./final_imgs/m1_discussion.png)
+
+With model 1 and its optimized hyperparameters, we were able to achieve a 65% test accuracy, which is slightly higher than just guessing the class with the most observations every time (see below). This is greater than the training accuracy achieved in hyperparameter tuning, where the max training accuracy was 63.8%. We can see, however, that the model predicts the first result (two dollar signs) for the most part with some guesses of three dollar signs, which conveys underfitting.
 
 ### Model 2 Results:
 ![classification report for model 2](./final_imgs/m2_results.png)
@@ -228,7 +230,7 @@ We achieved a training accuracy of 63% and a test accuracy of 60%.  This transla
 ```
 However, when viewing the prediction distribution, we can see the model predictions are heavily skewed towards predicting $$. 
 
-### Model 3 Results
+### Model 3 Results:
 Our initial XGBoost model produced a training accuracy of 0.67 and test accuracy of 0.58, however it heavily biases towards the default classes—it failed to predict every item not falling into the primary two classes.
 
 The oversampled model expectedly sacrificed accuracy for slightly more balanced predictive output. However, in this case, oversampling did not provide much value as the minority class predictions were inaccurate. Still, possibly due to favorable train/test partitioning, the model outperformed our base XGBoost model with a training accuracy of 0.59 and test accuracy of 0.61. The oversampling also appeared to help counteract overfitting.
